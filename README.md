@@ -56,4 +56,6 @@ curl -X POST http://localhost:3000/users -H "Content-Type: application/json" -d 
 ## Получение пользователя
 ```
 curl -X GET http://localhost:3000/users/{user_id}
+// or 
+http://localhost:3000/users/{user_id}
 ```
