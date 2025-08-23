@@ -41,6 +41,9 @@ make up
 curl -X POST http://localhost:3000/users \
   -H "Content-Type: application/json" \
   -d '{"login":"test_user","full_name":"Test User","gender":"male","age":25,"phone":"+1234567890","email":"test@example.com","avatar":"https://example.com/avatar.jpg","is_active":true}'
+
+// On windows
+curl -X POST http://localhost:3000/users -H "Content-Type: application/json" -d "{\"login\":\"john_doe\",\"full_name\":\"John Doe\",\"gender\":\"male\",\"age\":25,\"phone\":\"+1234567890\",\"email\":\"john@example.com\",\"avatar\":\"https://example.com/avatar.jpg \",\"is_active\":true}"
 ```
 ## Получение пользователя
 ```
