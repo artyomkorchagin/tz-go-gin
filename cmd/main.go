@@ -26,6 +26,15 @@ func init() {
 	config.LoadConfig()
 }
 
+//	@title			Comfortel Task
+//	@version		1.0
+
+//	@contact.name	Artyom Korchagin
+//	@contact.email	artyomkorchagin333@gmail.com
+
+//	@host		localhost:3000
+//	@BasePath	/
+
 func main() {
 	var zapLogger *zap.Logger
 	var err error
