@@ -1,0 +1,171 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "description": "Creates a new user with the provided information",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Create a new user",
+                "parameters": [
+                    {
+                        "description": "User information",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/types.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/types.User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - invalid user data",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "description": "Retrieves detailed information about a user by their unique identifier",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "User UUID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found successfully",
+                        "schema": {
+                            "$ref": "#/definitions/types.User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request - invalid UUID format",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "types.User": {
+            "type": "object",
+            "required": [
+                "full_name",
+                "login"
+            ],
+            "properties": {
+                "age": {
+                    "description": "Age of the user\nMinimum: 0\nMaximum: 150",
+                    "type": "integer"
+                },
+                "avatar": {
+                    "description": "URL to user's avatar image",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email address of the user\nformat: email\nmaxLength: 100",
+                    "type": "string"
+                },
+                "full_name": {
+                    "description": "Full name of the user (required)\nRequired: true\nminLength: 1\nmaxLength: 100",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "Gender of the user\nEnum: male,female,other",
+                    "type": "string"
+                },
+                "is_active": {
+                    "description": "Whether the user account is active",
+                    "type": "boolean"
+                },
+                "login": {
+                    "description": "Login/username of the user (required)\nRequired: true\nminLength: 1\nmaxLength: 50",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Phone number of the user\nmaxLength: 20",
+                    "type": "string"
+                },
+                "registration_date": {
+                    "description": "Registration date of the user\nswagger:ignore",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "Unique identifier of the user\nswagger:ignore",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

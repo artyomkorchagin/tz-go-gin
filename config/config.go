@@ -8,8 +8,7 @@ import (
 )
 
 func LoadConfig() {
-	viper.AddConfigPath("./.")
-	viper.SetConfigType("env")
+	viper.SetConfigFile("./.env")
 
 	viper.AutomaticEnv()
 

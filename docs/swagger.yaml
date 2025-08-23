@@ -1,0 +1,137 @@
+definitions:
+  types.User:
+    properties:
+      age:
+        description: |-
+          Age of the user
+          Minimum: 0
+          Maximum: 150
+        type: integer
+      avatar:
+        description: URL to user's avatar image
+        type: string
+      email:
+        description: |-
+          Email address of the user
+          format: email
+          maxLength: 100
+        type: string
+      full_name:
+        description: |-
+          Full name of the user (required)
+          Required: true
+          minLength: 1
+          maxLength: 100
+        type: string
+      gender:
+        description: |-
+          Gender of the user
+          Enum: male,female,other
+        type: string
+      is_active:
+        description: Whether the user account is active
+        type: boolean
+      login:
+        description: |-
+          Login/username of the user (required)
+          Required: true
+          minLength: 1
+          maxLength: 50
+        type: string
+      phone:
+        description: |-
+          Phone number of the user
+          maxLength: 20
+        type: string
+      registration_date:
+        description: |-
+          Registration date of the user
+          swagger:ignore
+        type: string
+      user_id:
+        description: |-
+          Unique identifier of the user
+          swagger:ignore
+        type: string
+    required:
+    - full_name
+    - login
+    type: object
+info:
+  contact: {}
+paths:
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new user with the provided information
+      parameters:
+      - description: User information
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/types.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User created successfully
+          schema:
+            $ref: '#/definitions/types.User'
+        "400":
+          description: Bad request - invalid user data
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new user
+      tags:
+      - users
+  /users/{user_id}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves detailed information about a user by their unique identifier
+      parameters:
+      - description: User UUID
+        format: uuid
+        in: path
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User found successfully
+          schema:
+            $ref: '#/definitions/types.User'
+        "400":
+          description: Bad request - invalid UUID format
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: User not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get user by ID
+      tags:
+      - users
+swagger: "2.0"

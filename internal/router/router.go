@@ -8,6 +8,8 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/zap"
+
+	_ "github.com/artyomkorchagin/tz-go-gin/docs"
 )
 
 type Handler struct {

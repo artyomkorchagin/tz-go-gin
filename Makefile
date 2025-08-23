@@ -12,10 +12,18 @@ down:
 restart: down up
 
 db-up:
-	@goose -dir migrations postgres "user=${DB_USER} password=${DB_PASSWORD} dbname=${DB_NAME} sslmode=${DB_SSLMODE}" up
+	@echo "Running migrations..."
+	@goose -dir migrations postgres "$(DB_DSN)" up
 
 db-down:
-	@goose -dir migrations postgres "user=${DB_USER} password=${DB_PASSWORD} dbname=${DB_NAME} sslmode=${DB_SSLMODE}" down
+	@echo "Rolling back migrations..."
+	@goose -dir migrations postgres "$(DB_DSN)" down
 
+db-status:
+	@goose -dir migrations postgres "$(DB_DSN)" status
+
+tests:
+	go test ./internal/repository/postgres/user/... -v
+	
 clean:
 	docker compose down -v --rmi all

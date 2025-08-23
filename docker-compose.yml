@@ -1,14 +1,14 @@
-
 services:
   backend:
     image: tzgogin
     build:
       context: ./
+      dockerfile: Dockerfile
     depends_on:
-      db:
+      order-db:
         condition: service_healthy
     environment:
-      SERVER_HOST: db
+      SERVER_HOST: order-db
       SERVER_PORT: ${SERVER_PORT}
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
@@ -17,9 +17,9 @@ services:
     ports:
       - "3000:3000"
 
-  db:
+  order-db:
     image: postgres:17
-    container_name: subscription-db
+    container_name: order-db
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
