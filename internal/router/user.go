@@ -15,6 +15,7 @@ func (h *Handler) getUser(c *gin.Context) error {
 		return fmt.Errorf("error reading user from DB: %w", err)
 	}
 	c.JSON(http.StatusOK, user)
+	h.logger.Info("Succesfully read user")
 	return nil
 }
 
@@ -34,5 +35,6 @@ func (h *Handler) createUser(c *gin.Context) error {
 			Err:  fmt.Errorf("error inserting user into DB: %v", err),
 		}
 	}
+	h.logger.Info("Succesfully created user")
 	return nil
 }

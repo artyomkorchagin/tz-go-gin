@@ -53,6 +53,11 @@ func main() {
 	}
 	zapLogger.Info("Connected to database")
 
+	if err := userpostgresql.RunMigrations(db); err != nil {
+		zapLogger.Fatal("Failed to run up migration", zap.Error(err))
+	}
+	zapLogger.Info("Succesfully ran up migration")
+
 	userRepo := userpostgresql.NewRepository(db)
 	userSvc := userservice.NewService(userRepo)
 
