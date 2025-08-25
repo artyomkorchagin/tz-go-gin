@@ -42,7 +42,7 @@ make up
 | `POST` | `/users` | Создание нового пользователя |
 | `GET` | `/users/{id}` | Получение пользователя по ID |
 | `GET` | `/status` | Проверка работоспособности API |
-| `GET` | `/swagger/*any` | Документация Swagger UI |
+| `GET` | `/swagger/index.html` | Документация Swagger UI |
 
 ## Создание пользователя
 ```
