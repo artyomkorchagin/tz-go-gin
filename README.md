@@ -25,7 +25,7 @@ REST API сервис для управления пользователями, 
 # Запуск
 ## 1. Клонирование репозитория
 ```
-git clone <repository-url>
+git clone https://github.com/artyomkorchagin/tz-go-gin
 cd tz-go-gin
 ```
 
@@ -56,4 +56,6 @@ curl -X POST http://localhost:3000/users -H "Content-Type: application/json" -d 
 ## Получение пользователя
 ```
 curl -X GET http://localhost:3000/users/{user_id}
+// or 
+http://localhost:3000/users/{user_id}
 ```
