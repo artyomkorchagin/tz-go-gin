@@ -21,7 +21,7 @@ import (
 func (r *Repository) CreateUser(ctx context.Context, u *types.User) error {
 
 	if u == nil {
-		return fmt.Errorf("user cannot be nil")
+		return types.ErrBadRequest(fmt.Errorf("user cant be nil"))
 	}
 
 	query := `
@@ -41,7 +41,7 @@ func (r *Repository) CreateUser(ctx context.Context, u *types.User) error {
 	)
 
 	if err != nil {
-		return fmt.Errorf("failed to create user: %w", err)
+		return types.ErrInternalServerError(fmt.Errorf("failed to create user: %w", err))
 	}
 
 	return nil

@@ -3,7 +3,6 @@ package userpostgresql
 import (
 	"context"
 	"database/sql"
-	"fmt"
 
 	"github.com/artyomkorchagin/tz-go-gin/internal/types"
 	"github.com/google/uuid"
@@ -17,7 +16,7 @@ import (
 // @Produce json
 // @Param user_id path string true "User UUID" Format(uuid)
 // @Success 200 {object} types.User "User found successfully"
-// @Failure 400 {object} map[string]string "Bad request - invalid UUID format"
+// @Failure 400 {object} map[string]string "Bad request"
 // @Failure 404 {object} map[string]string "User not found"
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /users/{user_id} [get]
@@ -43,9 +42,9 @@ func (r *Repository) ReadUser(ctx context.Context, user_id uuid.UUID) (*types.Us
 
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, fmt.Errorf("user not found: %w", err)
+			return nil, types.ErrNotFound(err)
 		}
-		return nil, fmt.Errorf("failed to read user: %w", err)
+		return nil, types.ErrInternalServerError(err)
 	}
 
 	return &user, nil

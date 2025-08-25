@@ -12,7 +12,7 @@ func (h *Handler) getUser(c *gin.Context) error {
 	id := c.Params.ByName("id")
 	user, err := h.userService.ReadUser(c, id)
 	if err != nil {
-		return fmt.Errorf("error reading user from DB: %w", err)
+		return err
 	}
 	c.JSON(http.StatusOK, user)
 	h.logger.Info("Succesfully read user")
@@ -23,17 +23,11 @@ func (h *Handler) createUser(c *gin.Context) error {
 	var u types.User
 
 	if err := c.BindJSON(&u); err != nil {
-		return HTTPError{
-			Code: http.StatusBadRequest,
-			Err:  fmt.Errorf("error binding JSON to struct: %w", err),
-		}
+		return types.ErrBadRequest(fmt.Errorf("error binding JSON to struct: %w", err))
 	}
 
 	if err := h.userService.CreateUser(c, &u); err != nil {
-		return HTTPError{
-			Code: http.StatusInternalServerError,
-			Err:  fmt.Errorf("error inserting user into DB: %v", err),
-		}
+		return err
 	}
 	h.logger.Info("Succesfully created user")
 	return nil

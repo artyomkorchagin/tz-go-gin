@@ -94,7 +94,7 @@
                         }
                     },
                     "400": {
-                        "description": "Bad request - invalid UUID format",
+                        "description": "Bad request",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {

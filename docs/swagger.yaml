@@ -120,7 +120,7 @@ paths:
           schema:
             $ref: '#/definitions/types.User'
         "400":
-          description: Bad request - invalid UUID format
+          description: Bad request
           schema:
             additionalProperties:
               type: string
